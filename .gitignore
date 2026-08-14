@@ -1,0 +1,54 @@
+# R specific files
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
+*.rda
+*.rds
+
+# RStudio files
+.rstudio
+.rstudio-desktop/
+.rstudio-server/
+
+# Environment management
+renv/
+.Rprofile.user
+.Renviron.local
+
+# Data files (if confidential)
+data/raw/*.csv
+data/raw/*.xlsx
+data/raw/*.xls
+!data/raw/.gitkeep
+
+# Output files (regenerable)
+output/*.png
+output/*.pdf
+output/*.html
+output/*.csv
+!output/.gitkeep
+
+# General files
+.DS_Store
+.Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Python (if used alongside)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# OS files
+Thumbs.db
+.DS_Store
