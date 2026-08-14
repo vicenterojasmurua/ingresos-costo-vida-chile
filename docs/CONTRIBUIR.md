@@ -1,6 +1,10 @@
-# Guía de Contribución
+# Guía de Contribución 🤝
 
-Gracias por tu interés en contribuir a este proyecto. Aquí encontrarás las pautas para hacerlo.
+Gracias por tu interés en contribuir a este proyecto. Este documento establece las directrices para contribuir de manera efectiva.
+
+## Código de Conducta
+
+Este proyecto espera que todos los contribuyentes sean respetuosos, constructivos y profesionales.
 
 ## 🚀 Cómo Contribuir
 

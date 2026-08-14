@@ -1,4 +1,6 @@
-# R specific files
+# ==========================================
+# R SPECIFIC FILES
+# ==========================================
 .Rhistory
 .Rapp.history
 .RData
@@ -7,27 +9,92 @@
 *.Rproj
 *.rda
 *.rds
+.renv/
 
-# RStudio files
+# ==========================================
+# RSTUDIO FILES
+# ==========================================
 .rstudio
 .rstudio-desktop/
 .rstudio-server/
+.RStudio.deriv
+.RStudio.portable
+*.Rproj
 
-# Environment management
+# ==========================================
+# ENVIRONMENT MANAGEMENT
+# ==========================================
 renv/
+renv_restore_script/
 .Rprofile.user
 .Renviron.local
+.Renviron
+venv/
+env/
 
-# Data files (if confidential)
+# ==========================================
+# DATA FILES (Keep raw data if non-confidential)
+# ==========================================
+# Descomenta si los datos son confidenciales:
 data/raw/*.csv
 data/raw/*.xlsx
 data/raw/*.xls
+data/raw/*.json
 !data/raw/.gitkeep
 
-# Output files (regenerable)
+# Keep processed data (regenerable from raw)
+data/processed/*.csv
+data/processed/*.xlsx
+!data/processed/.gitkeep
+
+# ==========================================
+# OUTPUT FILES (REGENERABLE)
+# ==========================================
 output/*.png
 output/*.pdf
 output/*.html
+output/*.jpg
+output/*.jpeg
+output/*.svg
+output/*.xlsx
+output/*.csv
+!output/.gitkeep
+
+# ==========================================
+# VSCODE
+# ==========================================
+.vscode/
+!.vscode/settings.json
+!.vscode/launch.json
+
+# ==========================================
+# OS SPECIFIC
+# ==========================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.env.local
+
+# ==========================================
+# IDE
+# ==========================================
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ==========================================
+# MISC
+# ==========================================
+*.log
+.cache/
+.pytest_cache/
+__pycache__/
+.ipynb_checkpoints/
+*.egg-info/
+.eggs/
+.tmp/
 output/*.csv
 !output/.gitkeep
 
