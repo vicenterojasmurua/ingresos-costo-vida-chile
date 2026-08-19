@@ -16,23 +16,41 @@ csl: ../refs/apa.csl
 editor: source
 ---
 
-# Presentación en Quarto
-<br>
-Presentación de resultados del proyecto de investigación sobre ingresos y costo de vida en Chile, utilizando datos de la CASEN 2024.
-<br>
-Jueves, 20 de agosto de 2026
-<br>
-Curso: Seminario
+::: title-cover
+<img src="../images/logo-sociales.png" class="logo-inline" width="250px"/>
 
-:::{.notes}
-Esta es la slide introductoria de la presentación 
+<h1><strong>Ingresos<wbr> y gastos:</strong></h1>
+
+<p class="cover-subtitle">
+
+<strong> Análisis de datos económicos en Chile</strong>
+
+</p>
+
+<hr class="title-divider"/>
+
+<p class="title-meta">
+
+<strong>Vicente Rojas Murúa</strong><br> Seminario de investigación avanzada en desigualdad y ciudadanía<br> 20 Agosto 2026, Santiago
+
+</p>
 :::
+
+## Guía de presentación
+
+Topicos:
+
+* **Introducción:** Introducción al tema.
+* **Antecedentes teóricos y empíricos:** Antecedentes de estudios.
+* **Contexto:** Contexto actual.
+* **Objetivo General y Específicos:** Definición de objetivos.
+* **Resultados preliminares:** Resultados estadísticos preliminares.
 
 ## Introducción al proyecto
 <br>
 Este proyecto analiza la relación entre los ingresos y el costo de vida utilizando datos de la CASEN 2024.
 
-## Antecedentes y Literatura
+## Antecedentes Teóricos y Empíricos
 
 La literatura sobre ingresos y costo de vida en Chile destaca la evolución del poder adquisitivo y el bienestar de los hogares:
 
@@ -40,7 +58,26 @@ La literatura sobre ingresos y costo de vida en Chile destaca la evolución del 
 * **INE:** Estructura del consumo y canastas [@ineEncuestaPresupuestosFamiliares].
 * **MDSF:** Evolución de la pobreza monetaria [@observatoriosocial-ministeriodedesarrollosocialyfamiliaEncuestaCaracterizacionSocioeconomica2022].
 
-# Contexto y Objetivos {background-color="#0F172A"}
+## Contexto
+
+## Algunos datos clave sobre Chile
+<br>
+Chile ha sufrido cambios significativos en su economía y sociedad durante la última década, afectando los ingresos y el costo de vida de los hogares.
+
+## Problema de investigación
+
+::: incremental
+
+- Persisten **problemas económicos** y una parte sustantiva de la sociedad los **sufre** (componentes contextuales). (CITAR)
+
+- La evidencia suele tratar por separado el **ingreso** y el **gasto**, omitiendo el rol articulado de **mecanismos de apropiación**.(CITAR)
+
+- Luego de los datos **CASEN** y **ESI**, persiste la duda sobre la **distribución del poder adquisitivo**. (CITAR)
+
+- El ciclo **2015-2025** expone **desbalances** y evidencia internacional de **crisis**, lo que podría haber **intensificado diferencias** en Chile. (CITAR)
+:::
+
+## Pregunta de investigación: ¿Cómo se distribuye el poder adquisitivo en Chile, Brasil y Argentina durante el decenio 2015-2025?
 
 ## Objetivo General
 <br>
@@ -62,7 +99,7 @@ Analizar la relación entre la evolución de los ingresos de los hogares y el co
 :::
 ::::
 
-# Carga y Procesamiento de Datos {background-color="#0F172A"}
+## Resultados preliminares
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -156,8 +193,6 @@ proc_casen %>%
   kable(digits = 1, col.names = c("Sexo", "Casos (N)", "Porcentaje (%)"), format.args = list(big.mark = "."))
 ```
 
----
-
 ## 3. Distribución de Ingresos y Pobreza
 
 Estadísticos descriptivos del ingreso total del hogar (`ytotcorh`) y clasificación de pobreza:
@@ -178,7 +213,7 @@ proc_casen %>%
   kable(digits = 0, format.args = list(big.mark = "."))
 ```
 
-## Distribución de Pobreza Monetaria
+## 4. Distribución de Pobreza Monetaria
 
 Distribución Pobreza
 
@@ -191,6 +226,14 @@ proc_casen %>%
   mutate(Porcentaje = n / sum(n) * 100) %>%
   kable(digits = 1, col.names = c("Clasificación Pobreza", "Frecuencia (N)", "(%)"), format.args = list(big.mark = "."))
 ```
+
+## ¡Gracias! Por su atención...
+
+Links:
+
+* **GitHub Public Repository:** https://github.com/vicenterojasmurua/ingresos-costo-vida-chile
+* **LinkedIn:** https://www.linkedin.com/in/vicenterojasmurua/
+* **Gmail:** victor.rojas.murua@gmail.com
 
 ## Referencias bibliográficas completas
 ::: {#refs}
