@@ -7,6 +7,7 @@
 # ===========================================
 
 library(tidyverse)
+library(haven)
 library(readxl)
 
 # ===========================================
@@ -24,6 +25,19 @@ dir.create(data_processed, showWarnings = FALSE, recursive = TRUE)
 # ===========================================
 # FUNCIONES DE CARGA
 # ===========================================
+
+#' Cargar datos Stata (.dta) con validación
+cargar_dta <- function(archivo, ...) {
+  ruta <- file.path(data_raw, archivo)
+  if (!file.exists(ruta)) {
+    warning(paste("Archivo no encontrado:", ruta))
+    return(NULL)
+  }
+  
+  datos <- read_dta(ruta, ...)
+  cat("✓ Cargado:", archivo, "-", nrow(datos), "filas\n")
+  return(datos)
+}
 
 #' Cargar datos CSV con validación
 cargar_csv <- function(archivo, ...) {
@@ -55,8 +69,8 @@ cargar_excel <- function(archivo, sheet = 1, ...) {
 # CARGAR DATASETS
 # ===========================================
 
-# Ejemplo: cargar ingresos
-# ingresos <- cargar_csv("ingresos_chile.csv")
+# Ejemplo: cargar casen 2024
+casen2024 <- cargar_dta("casen_2024.dta")
 
 # Ejemplo: cargar costo de vida
 # costo_vida <- cargar_csv("costo_vida_chile.csv")
@@ -69,7 +83,9 @@ cargar_excel <- function(archivo, sheet = 1, ...) {
 # ===========================================
 
 # Ejemplo de guardado (descomentar cuando tengas datos)
-# saveRDS(ingresos, file.path(data_processed, "ingresos_raw.rds"))
+
+saveRDS(casen2024, file.path(data_processed, "casen2024_raw.rds"))
+
 # saveRDS(costo_vida, file.path(data_processed, "costo_vida_raw.rds"))
 
 cat("\n✓ Script 01 completado\n")

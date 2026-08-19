@@ -33,19 +33,20 @@ venv/
 env/
 
 # ==========================================
-# DATA FILES (Keep raw data if non-confidential)
+# DATA FILES
 # ==========================================
-# Descomenta si los datos son confidenciales:
-data/raw/*.csv
-data/raw/*.xlsx
-data/raw/*.xls
-data/raw/*.json
+# Ignorar todas las bases de datos en raw y processed
+data/raw/*
 !data/raw/.gitkeep
 
-# Keep processed data (regenerable from raw)
-data/processed/*.csv
-data/processed/*.xlsx
+data/processed/*
 !data/processed/.gitkeep
+
+# Archivos de datos pesados (Stata, SPSS, RData, etc.)
+*.dta
+*.sav
+*.csv
+*.xlsx
 
 # ==========================================
 # OUTPUT FILES (REGENERABLE)
