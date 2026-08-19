@@ -51,8 +51,38 @@ correlaciones <- function(datos, vars_numericas = NULL) {
 # ANÁLISIS EXPLORATORIO
 # ===========================================
 
+names(casen2024) # Listar archivos en el directorio de datos
+
+dim(casen2024) # Dimensiones
+
+proc_casen <- casen2024 %>%
+    dplyr::select(
+        id_vivienda,
+        folio, 
+        id_persona,
+        region, 
+        tot_per_h, 
+        edad,
+        sexo,
+        salario = y1,
+        pobreza,
+        ytotcorh,
+        ytotcor,
+        yaimcorh,
+        yautcorh,
+        yautcor
+    )
+
 # Ejemplo de análisis (descomentar cuando tengas datos)
-#
+
+cor(x = proc_casen$salario, 
+    y = proc_casen$pobreza, 
+    use = "complete.obs")
+
+sjPlot::plot_scatter(data = proc_casen, 
+                     x = salario,
+                     y = pobreza)
+
 # ingresos <- readRDS(file.path(data_processed, "ingresos_limpio.rds"))
 # 
 # # Resúmenes por variable

@@ -1,0 +1,197 @@
+---
+title: "Análisis de Ingresos y Costo de Vida en Chile"
+subtitle: "Resultados y visualizaciones con CASEN 2024"
+author: "Proyecto: ingresos-costo-vida-chile"
+date: "2026-08-20"
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    transition: slide
+    transition-speed: fast
+    controls: true
+    embed-resources: true
+bibliography: ../refs/references.bib
+csl: ../refs/apa.csl
+editor: source
+---
+
+# Presentación en Quarto
+<br>
+Presentación de resultados del proyecto de investigación sobre ingresos y costo de vida en Chile, utilizando datos de la CASEN 2024.
+<br>
+Jueves, 20 de agosto de 2026
+<br>
+Curso: Seminario
+
+:::{.notes}
+Esta es la slide introductoria de la presentación 
+:::
+
+## Introducción al proyecto
+<br>
+Este proyecto analiza la relación entre los ingresos y el costo de vida utilizando datos de la CASEN 2024.
+
+## Antecedentes y Literatura
+
+La literatura sobre ingresos y costo de vida en Chile destaca la evolución del poder adquisitivo y el bienestar de los hogares:
+
+* **CEPAL:** Tendencias regionales en desigualdad y gasto [@cepalPanoramaSocialAmerica2025].
+* **INE:** Estructura del consumo y canastas [@ineEncuestaPresupuestosFamiliares].
+* **MDSF:** Evolución de la pobreza monetaria [@observatoriosocial-ministeriodedesarrollosocialyfamiliaEncuestaCaracterizacionSocioeconomica2022].
+
+# Contexto y Objetivos {background-color="#0F172A"}
+
+## Objetivo General
+<br>
+Analizar la relación entre la evolución de los ingresos de los hogares y el costo de vida en Chile, Brasil y Argentina durante el decenio 2015-2025, evaluando las variaciones en el poder adquisitivo y las heterogeneidades socioeconómicas entre quintiles de ingreso.
+
+## Objetivos Específicos
+
+::::{.columns}
+:::{.column width="50%"}
+- Procesar y estandarizar los microdatos de las encuestas de hogares de Chile (CASEN), Brasil (PNAD Contínua) y Argentina (EPH) para el período 2015-2025, equiparando las variables de ingresos y características sociodemográficas del hogar.
+
+- Definir y calcular los indicadores de costo de vida, IPC y CBA/CBT para cada país dentro del marco temporal seleccionado.
+:::
+
+:::{.column width="50%"}
+- Calcular la variación del poder adquisitivo real por quintil de ingreso en las tres economías, identificando brechas y patrones frente a la inflación/crisis.
+
+- Comparar socioeconómicamente a Chile, Brasil y Argentina.
+:::
+::::
+
+# Carga y Procesamiento de Datos {background-color="#0F172A"}
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(haven)
+library(knitr)
+
+# Cargar la base de datos
+casen2024 <- readRDS("../data/processed/casen2024_raw.rds")
+
+# Selección de variables y remoción de metadatos/etiquetas Stata
+proc_casen <- casen2024 %>%
+  dplyr::select(
+    id_vivienda, folio, id_persona, region, tot_per_h, 
+    edad, sexo, salario = y1, pobreza, 
+    ytotcorh, ytotcor, yaimcorh, yautcorh, yautcor
+  ) %>%
+  mutate(
+    sexo = if_else(sexo == 1, "Hombre", "Mujer"),
+    pobreza = case_when(
+      pobreza == 1 ~ "Pobreza Extrema",
+      pobreza == 2 ~ "Pobreza No Extrema",
+      pobreza == 3 ~ "No Pobre",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  haven::zap_labels() %>%
+  haven::zap_label()
+```
+
+## 1. Estructura y Limpieza de Datos
+
+Resumen cuantitativo de la muestra en **CASEN 2024**:
+
+```{r}
+#| echo: false
+#| eval: true
+
+# Dimensiones generales
+
+tibble(
+  Métrica = c("Total Registros (Filas)", "Variables Seleccionadas (Columnas)"),
+  Valor = c(nrow(proc_casen), ncol(proc_casen))
+) %>% 
+  kable(format.args = list(big.mark = "."))
+```
+
+## Variables Seleccionadas
+<br>
+| Tipo de Variable | Variables Seleccionadas |
+| :--- | :--- |
+| **Identificadores** | `id_vivienda`, `folio`, `id_persona`, `region` |
+| **Demografía** | `tot_per_h` (personas por hogar), `edad`, `sexo` |
+| **Ingresos** | `salario` (y1), `ytotcorh`, `ytotcor`, `yaimcorh`, `yautcorh` |
+| **Social** | `pobreza` |
+
+---
+
+## 2. Perfil Demográfico de la Muestra
+
+Resumen de variables continuas
+
+```{r}
+#| echo: false
+#| eval: true
+
+# Resumen de variables continuas
+proc_casen %>%
+  summarise(
+    Promedio = mean(edad, na.rm = TRUE),
+    Mediana  = median(edad, na.rm = TRUE),
+    Mínimo   = min(edad, na.rm = TRUE),
+    Máximo   = max(edad, na.rm = TRUE)
+  ) %>%
+  mutate(Variable = "Edad (Años)") %>%
+  select(Variable, everything()) %>%
+  kable(digits = 1)
+```
+
+## 2. Perfil Demográfico de la Muestra
+
+Tabla de frecuencias por Sexo
+
+```{r}
+#| echo: false
+#| eval: true
+
+# Tabla de frecuencias por Sexo
+proc_casen %>%
+  count(sexo) %>%
+  mutate(Porcentaje = n / sum(n) * 100) %>%
+  kable(digits = 1, col.names = c("Sexo", "Casos (N)", "Porcentaje (%)"), format.args = list(big.mark = "."))
+```
+
+---
+
+## 3. Distribución de Ingresos y Pobreza
+
+Estadísticos descriptivos del ingreso total del hogar (`ytotcorh`) y clasificación de pobreza:
+
+```{r}
+#| echo: false
+#| eval: true
+
+# Resumen de Ingresos
+proc_casen %>%
+  summarise(
+    `Ingreso Promedio Hogar` = mean(ytotcorh, na.rm = TRUE),
+    `Ingreso Mediano Hogar`  = median(ytotcorh, na.rm = TRUE),
+    `Salario Promedio (y1)`  = mean(salario, na.rm = TRUE),
+    `Salario Mediano (y1)`   = median(salario, na.rm = TRUE)
+  ) %>%
+  pivot_longer(everything(), names_to = "Indicador", values_to = "Monto ($)") %>%
+  kable(digits = 0, format.args = list(big.mark = "."))
+```
+
+## Distribución de Pobreza Monetaria
+
+Distribución Pobreza
+
+```{r}
+#| echo: false
+#| eval: true
+
+proc_casen %>%
+  count(pobreza) %>%
+  mutate(Porcentaje = n / sum(n) * 100) %>%
+  kable(digits = 1, col.names = c("Clasificación Pobreza", "Frecuencia (N)", "(%)"), format.args = list(big.mark = "."))
+```
+
+## Referencias bibliográficas completas
+::: {#refs}
+:::

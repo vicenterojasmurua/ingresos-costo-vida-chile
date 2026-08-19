@@ -43,23 +43,23 @@ validar_tipos <- function(datos) {
 # ===========================================
 
 # Ejemplo de flujo de limpieza (descomentar cuando tengas datos)
-# 
-# ingresos_limpio <- readRDS("data/processed/ingresos_raw.rds") %>%
-#   limpiar_datos() %>%
-#   # Convertir columnas de fechas
-#   mutate(
-#     fecha = as.Date(fecha)
-#   ) %>%
-#   # Convertir a numérico
-#   mutate(
-#     ingresos = as.numeric(ingresos)
-#   )
-# 
-# # Validar
-# validar_tipos(ingresos_limpio)
-# 
-# # Guardar
-# saveRDS(ingresos_limpio, file.path(data_processed, "ingresos_limpio.rds"))
+ 
+ ingresos_limpio <- readRDS("data/processed/ingresos_raw.rds") %>%
+   limpiar_datos() %>%
+   # Convertir columnas de fechas
+   mutate(
+     fecha = as.Date(fecha)
+   ) %>%
+   # Convertir a numérico
+   mutate(
+     ingresos = as.numeric(ingresos)
+   )
+ 
+ # Validar
+ validar_tipos(ingresos_limpio)
+ 
+ # Guardar
+ saveRDS(ingresos_limpio, file.path(data_processed, "ingresos_limpio.rds"))
 
 # ===========================================
 # RESUMEN
