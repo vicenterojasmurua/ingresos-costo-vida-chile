@@ -1,0 +1,16 @@
+# .Renviron.example
+# ================================
+# Copia este archivo a .Renviron y completa los valores
+# NEVER commit .Renviron a git (solo .Renviron.example)
+# ================================
+
+# Configuración regional
+LANG=es_ES.UTF-8
+LC_ALL=es_ES.UTF-8
+
+# Directorio temporal de R
+# TMPDIR=/tmp
+
+# Personal API tokens or credentials (if needed)
+# GITHUB_TOKEN=
+# API_KEY=
