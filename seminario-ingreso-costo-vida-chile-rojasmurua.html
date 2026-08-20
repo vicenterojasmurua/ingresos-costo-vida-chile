@@ -1112,7 +1112,7 @@ margin-right: 0; }
 <ul>
 <li>Procesar y estandarizar los microdatos de la encuesta CASEN 2024.</li>
 <li>Analizar estadísticamente la distribución de ingresos laborales y pobreza monetaria.</li>
-<li>Modelar las determinantes del salario (sexo, edad, tamaño del hogar) para identificar brechas iniciales.</li>
+<li>Modelar las determinantes del salario (sexo, edad, educación, etc.) para identificar brechas iniciales.</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Para las siguientes fases (Estudio Comparativo Tesis):</strong></p>
@@ -1123,12 +1123,23 @@ margin-right: 0; }
 </ul>
 </div></div>
 </section>
-<section id="hipótesis-de-investigación" class="slide level2">
+<section id="hipótesis-de-investigación" class="slide level2 smaller">
 <h2>Hipótesis de Investigación</h2>
-<p>Para guiar el análisis estadístico preliminar de los ingresos, planteamos las siguientes hipótesis:</p>
+<p>Para evaluar la distribución de los ingresos laborales (<span class="math inline">\(y_1\)</span>) en CASEN 2024, planteamos las siguientes hipótesis:</p>
 <ul>
-<li><p><strong>Hipótesis de Trabajo (H1):</strong> Existen diferencias estadísticamente significativas en los ingresos por trabajo (<code>salario</code>) según las características sociodemográficas, específicamente el sexo, lo que evidencia brechas de poder adquisitivo.</p></li>
-<li><p><strong>Hipótesis Nula (H0):</strong> No existen diferencias estadísticamente significativas en el promedio de ingresos por trabajo (<code>salario</code>) entre hombres y mujeres en la muestra de CASEN 2024.</p></li>
+<li><strong><span class="math inline">\(H_1\)</span> (Brecha Salarial por Sexo):</strong>
+<ul>
+<li><strong><span class="math inline">\(H_{1a}\)</span> (Brecha Bruta):</strong> Existen diferencias estadísticamente significativas en el salario promedio (<code>salario</code>) entre hombres y mujeres.</li>
+<li><strong><span class="math inline">\(H_{1b}\)</span> (Brecha Ajustada):</strong> Controlando por capital humano y estructura del hogar, persiste una penalización salarial hacia las mujeres en el logaritmo del salario (<code>log_salario</code>).</li>
+</ul></li>
+<li><strong><span class="math inline">\(H_2\)</span> (Rendimientos del Capital Humano):</strong>
+<ul>
+<li>Mayores niveles educacionales y la experiencia potencial (<code>edad</code> y <code>edad^2</code>) incrementan de forma positiva y no lineal el ingreso laboral individual.</li>
+</ul></li>
+<li><strong><span class="math inline">\(H_0\)</span> (Hipótesis Nula):</strong>
+<ul>
+<li>No existen diferencias estadísticamente significativas en los ingresos por trabajo según sexo ni rendimiento significativo de las variables de capital humano.</li>
+</ul></li>
 </ul>
 </section>
 <section id="estrategia-metodológica-fuentes-de-datos" class="slide level2 smaller">
@@ -1205,16 +1216,63 @@ margin-right: 0; }
 </tr>
 <tr class="even">
 <td style="text-align: left;">Variables Seleccionadas (Columnas)</td>
-<td style="text-align: right;">19</td>
+<td style="text-align: right;">11</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-<section id="variables-seleccionadas" class="slide level2">
+<section id="variables-seleccionadas" class="slide level2 smaller">
 <h2>Variables Seleccionadas</h2>
-<p><br> | Dimensión | Variable | Descripción | | :— | :— | :— | | <strong>Identificación</strong> | <code>id_vivienda</code>, <code>folio</code>, <code>id_persona</code> | Claves únicas de hogar e individuo. | | <strong>Territorio</strong> | <code>region</code> | Criterio de desagregación regional. | | <strong>Demografía</strong> | <code>sexo</code>, <code>edad</code>, <code>tot_per_h</code> | Caracterización de la persona y tamaño del hogar. | | <strong>Educación</strong> | <code>nivel_educacional</code> (<code>e6a</code>) | Nivel educativo alcanzado. | | <strong>Ingresos</strong> | <code>salario</code> (<code>y1</code>), <code>ytotcorh</code>, <code>ytotcor</code> | Ingreso laboral principal e ingreso total corregido. | | <strong>Bienestar</strong> | <code>pobreza</code> | Clasificación oficial de pobreza monetaria. | | <strong>Diseño Muestral</strong>| <code>expr</code>, <code>varstrat</code>, <code>varunit</code> | Ponderadores y estrato para inferencia poblacional. |</p>
+<div style="font-size: 0.65em; line-height: 1.2;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dimensión</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Descripción / Uso en el Análisis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Demografía</strong></td>
+<td style="text-align: left;"><code>sexo</code>, <code>edad</code>, <code>tot_per_h</code></td>
+<td style="text-align: left;">Caracterización de la muestra y controles sociodemográficos en el modelo salarial.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Educación</strong></td>
+<td style="text-align: left;"><code>nivel_educacional</code></td>
+<td style="text-align: left;">Nivel educativo alcanzado (renombrada de <code>e6a</code>), predictor clave en el modelo Minceriano.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ingresos</strong></td>
+<td style="text-align: left;"><code>salario</code>, <code>ytotcorh</code></td>
+<td style="text-align: left;">Salario individual (<code>y1</code>) e ingreso total corregido del hogar.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Variable Creada</strong></td>
+<td style="text-align: left;"><code>log_salario</code></td>
+<td style="text-align: left;">Logaritmo natural del salario (<span class="math inline">\(\log(y_1)\)</span>), variable dependiente en la regresión <code>svyglm</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Bienestar</strong></td>
+<td style="text-align: left;"><code>pobreza</code></td>
+<td style="text-align: left;">Clasificación oficial de pobreza monetaria (Pobreza Extrema, No Extrema, No Pobre).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Diseño Muestral</strong></td>
+<td style="text-align: left;"><code>expr</code>, <code>varstrat</code>, <code>varunit</code></td>
+<td style="text-align: left;">Factor de expansión, estrato y UPM para inferencia poblacional ponderada en <code>srvyr</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="a.-perfil-demográfico-de-la-muestra-edad" class="slide level2">
 <h2>2a. Perfil Demográfico de la Muestra: Edad</h2>
@@ -1271,9 +1329,43 @@ margin-right: 0; }
 </div>
 </div>
 </section>
-<section id="distribución-de-ingresos-y-pobreza" class="slide level2">
-<h2>3. Distribución de Ingresos y Pobreza</h2>
-<p>Estadísticos descriptivos del ingreso total del hogar (<code>ytotcorh</code>) y clasificación de pobreza:</p>
+<section id="c.-perfil-sociodemográfico-tamaño-del-hogar" class="slide level2 smaller">
+<h2>2c. Perfil Sociodemográfico: Tamaño del Hogar</h2>
+<p>Distribución descriptiva de la cantidad de integrantes por hogar (<code>tot_per_h</code>) estimada para la población:</p>
+<p><br></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Estadístico Descriptivo</th>
+<th style="text-align: right;">Valor (N° de Personas)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Promedio</td>
+<td style="text-align: right;">3.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mediana</td>
+<td style="text-align: right;">3.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mínimo</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Máximo</td>
+<td style="text-align: right;">19.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="distribución-de-ingresos-del-hogar-y-el-salario" class="slide level2">
+<h2>3. Distribución de Ingresos del Hogar y el Salario</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1307,7 +1399,6 @@ margin-right: 0; }
 </section>
 <section id="distribución-de-pobreza-monetaria" class="slide level2">
 <h2>4. Distribución de Pobreza Monetaria</h2>
-<p>Distribución Pobreza</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -1344,205 +1435,153 @@ margin-right: 0; }
 </div>
 </div>
 </section>
-<section id="análisis-bivariado-salario-según-sexo" class="slide level2">
+<section id="análisis-bivariado-salario-según-sexo" class="slide level2 smaller">
 <h2>5. Análisis Bivariado: Salario según Sexo</h2>
-<p>Para evaluar nuestra <strong>Hipótesis Nula (H0)</strong>, realizamos una prueba <em>t de Student</em> comparando el salario promedio (variable <code>y1</code>) entre hombres y mujeres.</p>
+<div class="columns">
+<div class="column" style="width:55%;">
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
-<caption>Resultados Prueba T (Ponderada): Salario por Sexo</caption>
-<colgroup>
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 10%">
-<col style="width: 11%">
-<col style="width: 22%">
-<col style="width: 13%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">parameter</th>
-<th style="text-align: right;">conf.low</th>
-<th style="text-align: right;">conf.high</th>
-<th style="text-align: left;">method</th>
-<th style="text-align: left;">alternative</th>
+<th style="text-align: right;">Dif. Media ($)</th>
+<th style="text-align: right;">Estadístico t</th>
+<th style="text-align: center;">p-valor</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">-162962.7</td>
-<td style="text-align: right;">-19.509</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">11549</td>
-<td style="text-align: right;">-179336</td>
-<td style="text-align: right;">-146589.4</td>
-<td style="text-align: left;">Design-based t-test</td>
-<td style="text-align: left;">two.sided</td>
+<td style="text-align: right;">-162.962.7</td>
+<td style="text-align: right;">-19.51</td>
+<td style="text-align: center;">0.000 ***</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div style="font-size: 0.65em; line-height: 1.3;">
+<p>Interpretación de Resultados:</p>
+<p>Rechazo de <span class="math inline">\(H_0\)</span>: La diferencia de ingresos promedio entre hombres y mujeres es estadísticamente significativa (<span class="math inline">\(p &lt; 0.001\)</span>).</p>
+<p>Evidencia para <span class="math inline">\(H_{1a}\)</span>: Confirma la existencia de una brecha salarial bruta en la población ocupada.</p>
+<p>Limitación: Al ser un análisis bivariado, no controla por educación, edad u horas trabajadas (lo que se evalúa en el modelo multivariado).</p>
+</div>
+</div></div>
+</section>
+<section id="modelo-multivariado-determinantes-del-salario" class="slide level2 smaller">
+<h2>6. Modelo Multivariado: Determinantes del Salario</h2>
+<div class="columns">
+<div class="column" style="width:52%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Coef. (β)</th>
+<th style="text-align: right;">E.E.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercepto</td>
+<td style="text-align: right;">11.433 ***</td>
+<td style="text-align: right;">0.061</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mujer (vs. H)</td>
+<td style="text-align: right;">-0.243 ***</td>
+<td style="text-align: right;">0.006</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Edad</td>
+<td style="text-align: right;">0.075 ***</td>
+<td style="text-align: right;">0.002</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Edad²</td>
+<td style="text-align: right;">-0.001 ***</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Educ. 2. Media</td>
+<td style="text-align: right;">0.085</td>
+<td style="text-align: right;">0.049</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Educ. 3. Técnica</td>
+<td style="text-align: right;">0.291 ***</td>
+<td style="text-align: right;">0.049</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Educ. 4. Univ/Post</td>
+<td style="text-align: right;">0.793 ***</td>
+<td style="text-align: right;">0.049</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tam. Hogar</td>
+<td style="text-align: right;">-0.034 ***</td>
+<td style="text-align: right;">0.002</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:48%;">
+<div style="font-size: 0.62em; line-height: 1.3;">
+<p>Interpretación Económica:</p>
+<p>Brecha de Género (<span class="math inline">\(H_{1b}\)</span>): Penalización salarial significativa para mujeres (<span class="math inline">\(\beta &lt; 0\)</span>), controlando por capital humano y hogar.</p>
+<p>Retornos Educación (<span class="math inline">\(H_2\)</span>): Retorno salarial creciente para Educación Técnica y Universitaria/Postgrado respecto a la base (Básica).</p>
+<p>Experiencia (<span class="math inline">\(H_2\)</span>): Concavidad minceriana confirmada (<span class="math inline">\(\text{Edad} &gt; 0\)</span> y <span class="math inline">\(\text{Edad}^2 &lt; 0\)</span>).</p>
+<p>Notas:</p>
+<p>Signif: *** <span class="math inline">\(p &lt; 0.001\)</span>, ** <span class="math inline">\(p &lt; 0.01\)</span>, * <span class="math inline">\(p &lt; 0.05\)</span>.</p>
+<p>Dep: <span class="math inline">\(\log(\text{salario})\)</span>.</p>
+<p>Categóricas: <span class="math inline">\(\% \Delta Y = (\exp(\beta) - 1) \times 100\)</span>.</p>
+</div>
+</div></div>
+</section>
+<section id="a.-articulación-indicadores-de-cobertura-y-brecha-casen---epf" class="slide level2 smaller">
+<h2>7a. Articulación: Indicadores de Cobertura y Brecha (CASEN - EPF)</h2>
+<p>Cruce del costo de la <strong>Canasta Básica Alimentaria (EPF)</strong> con los ingresos laborales y la estructura del hogar <strong>(CASEN 2024)</strong>:</p>
+<p><br></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Indicador de Brecha</th>
+<th style="text-align: left;">Estimación Poblacional</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CBA Per Cápita (EPF)</td>
+<td style="text-align: left;">$ 111.008</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CBA Hogar Promedio (4 personas)</td>
+<td style="text-align: left;">$ 444.032</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Salario Mediano (CASEN)</td>
+<td style="text-align: left;">$ 600.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ocupados sin Cobertura CBA Familiar (%)</td>
+<td style="text-align: left;">18.2 %</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-<section id="modelo-multivariado-determinantes-del-salario" class="slide level2 smaller">
-<h2>6. Modelo Multivariado: Determinantes del Salario</h2>
-<p>Modelo Minceriano semilogarítmico ajustado por diseño muestral complejo (svyglm) para estimar determinantes del logaritmo del salario (log_salario), controlando por sexo, edad, edad al cuadrado, nivel educacional y tamaño del hogar.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top">
-<caption>Modelo Semilogarítmico Ponderado (Determinantes del Log Salario)</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">11.4726</td>
-<td style="text-align: right;">0.0574</td>
-<td style="text-align: right;">199.9081</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">sexoMujer</td>
-<td style="text-align: right;">-0.2572</td>
-<td style="text-align: right;">0.0056</td>
-<td style="text-align: right;">-46.1410</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">edad</td>
-<td style="text-align: right;">0.0693</td>
-<td style="text-align: right;">0.0017</td>
-<td style="text-align: right;">40.9693</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">I(edad^2)</td>
-<td style="text-align: right;">-0.0007</td>
-<td style="text-align: right;">0.0000</td>
-<td style="text-align: right;">-36.6142</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">factor(nivel_educacional)2</td>
-<td style="text-align: right;">1.6299</td>
-<td style="text-align: right;">0.0460</td>
-<td style="text-align: right;">35.4591</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(nivel_educacional)3</td>
-<td style="text-align: right;">-0.9273</td>
-<td style="text-align: right;">0.0464</td>
-<td style="text-align: right;">-19.9847</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">factor(nivel_educacional)4</td>
-<td style="text-align: right;">-0.6970</td>
-<td style="text-align: right;">0.8225</td>
-<td style="text-align: right;">-0.8473</td>
-<td style="text-align: right;">0.3968</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(nivel_educacional)5</td>
-<td style="text-align: right;">-0.0277</td>
-<td style="text-align: right;">0.0940</td>
-<td style="text-align: right;">-0.2946</td>
-<td style="text-align: right;">0.7683</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">factor(nivel_educacional)6</td>
-<td style="text-align: right;">0.1849</td>
-<td style="text-align: right;">0.0597</td>
-<td style="text-align: right;">3.0978</td>
-<td style="text-align: right;">0.0020</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(nivel_educacional)7</td>
-<td style="text-align: right;">0.0793</td>
-<td style="text-align: right;">0.0460</td>
-<td style="text-align: right;">1.7256</td>
-<td style="text-align: right;">0.0844</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">factor(nivel_educacional)8</td>
-<td style="text-align: right;">0.2908</td>
-<td style="text-align: right;">0.0615</td>
-<td style="text-align: right;">4.7315</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(nivel_educacional)9</td>
-<td style="text-align: right;">0.2992</td>
-<td style="text-align: right;">0.0460</td>
-<td style="text-align: right;">6.4985</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">factor(nivel_educacional)10</td>
-<td style="text-align: right;">0.4711</td>
-<td style="text-align: right;">0.0645</td>
-<td style="text-align: right;">7.3048</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(nivel_educacional)11</td>
-<td style="text-align: right;">0.4112</td>
-<td style="text-align: right;">0.0464</td>
-<td style="text-align: right;">8.8657</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">factor(nivel_educacional)12</td>
-<td style="text-align: right;">0.5756</td>
-<td style="text-align: right;">0.0465</td>
-<td style="text-align: right;">12.3753</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(nivel_educacional)13</td>
-<td style="text-align: right;">0.9746</td>
-<td style="text-align: right;">0.0468</td>
-<td style="text-align: right;">20.8358</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">factor(nivel_educacional)14</td>
-<td style="text-align: right;">1.5572</td>
-<td style="text-align: right;">0.0504</td>
-<td style="text-align: right;">30.9041</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">factor(nivel_educacional)15</td>
-<td style="text-align: right;">1.5091</td>
-<td style="text-align: right;">0.0732</td>
-<td style="text-align: right;">20.6111</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">tot_per_h</td>
-<td style="text-align: right;">-0.0177</td>
-<td style="text-align: right;">0.0021</td>
-<td style="text-align: right;">-8.4058</td>
-<td style="text-align: right;">0.0000</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<section id="b.-articulación-implicancias-sobre-el-poder-adquisitivo" class="slide level2 smaller">
+<h2>7b. Articulación: Implicancias sobre el Poder Adquisitivo</h2>
+<ul>
+<li><strong>Presión sobre el Ingreso Individual:</strong> La Canasta Básica Alimentaria para un hogar promedio (4 personas) exige una proporción sustancial del salario mediano individual.</li>
+<li><strong>Insuficiencia del Salario Laboral:</strong> Una fracción importante de la población ocupada percibe un salario individual insuficiente para cubrir la CBA de su grupo familiar.</li>
+<li><strong>Dependencia de Múltiples Perceptores:</strong> Se requieren necesariamente múltiples perceptores o transferencias estatales para financiar gastos no alimentarios esenciales (vivienda, transporte, salud y educación).</li>
+</ul>
 </section>
 <section id="próximos-pasos-de-la-investigación" class="slide level2">
 <h2>Próximos pasos de la investigación</h2>
@@ -1554,7 +1593,7 @@ margin-right: 0; }
 </ul>
 </section>
 <section id="gracias-por-su-atención" class="slide level2">
-<h2>¡Gracias por su atención!</h2>
+<h2>¡Gracias! por su atención…</h2>
 <p>Más información:</p>
 <ul>
 <li><strong>GitHub:</strong> <a href="https://github.com/vicenterojasmurua/ingresos-costo-vida-chile">vicenterojasmurua/ingresos-costo-vida-chile</a></li>
