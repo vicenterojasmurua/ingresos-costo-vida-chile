@@ -1,30 +1,30 @@
 # Análisis de Ingresos y Costo de Vida en Chile 📊
 
+![Stata version](https://img.shields.io/badge/Stata-17.0+-blue)
 ![R version](https://img.shields.io/badge/R-4.3.0+-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Overleaf Sync](https://img.shields.io/badge/Overleaf-Compatible-brightgreen)
 
 ## Descripción
 
-Este proyecto analiza la relación entre ingresos y costo de vida en Chile, proporcionando visualizaciones y análisis exploratorio de datos sobre indicadores económicos y sociales.
+Este proyecto analiza la relación entre ingresos y costo de vida en Chile mediante el procesamiento de microdatos de la encuesta CASEN 2024, EPH (Argentina) y PNAD (Brasil). El flujo de trabajo está diseñado bajo estándares estrictos de **Open Science**, garantizando replicabilidad determinista y conexión automatizada con LaTeX (Overleaf).
 
 ## 📁 Estructura del Proyecto
 
-```
+```text
 ingresos-costo-vida-chile/
 ├── data/
-│   ├── raw/              # Datos sin procesar
-│   └── processed/        # Datos limpios y procesados
+│   ├── raw/              # Microdatos crudos (CASEN, EPH, PNAD)
+│   └── processed/        # Microdatos limpios y armonizados
 ├── scripts/
-│   ├── 01_carga_datos.R           # Carga de datos
-│   ├── 02_limpieza_datos.R        # Limpieza y transformación
-│   ├── 03_analisis_exploratorio.R # EDA (Exploratory Data Analysis)
-│   └── 04_visualizaciones.R       # Gráficos y visualizaciones
-├── output/               # Resultados (gráficos, reportes)
-├── docs/
-│   └── CONTRIBUIR.md    # Guía de contribución
-├── .Rprofile            # Configuración del entorno R
-├── renv.lock            # Lock file de dependencias
-└── README.md            # Este archivo
+│   ├── stata/            # Do-files de Stata 17 (Procesamiento y Modelos)
+│   └── r/                # Scripts auxiliares en R
+├── output/               # Salidas vinculadas a Overleaf
+│   ├── tables/           # Tablas estadísticas en código LaTeX (.tex)
+│   └── figures/          # Gráficos vectoriales (.pdf)
+├── logs/                 # Registros de ejecución para auditoría
+├── .gitignore            # Exclusión de datos pesados
+└── README.md             # Instrucciones de replicación
 ```
 
 ## 🚀 Inicio Rápido

@@ -12,111 +12,51 @@
 .renv/
 
 # ==========================================
-# RSTUDIO FILES
-# ==========================================
-.rstudio
-.rstudio-desktop/
-.rstudio-server/
-.RStudio.deriv
-.RStudio.portable
-*.Rproj
-
-# ==========================================
 # ENVIRONMENT MANAGEMENT
 # ==========================================
 renv/
-renv_restore_script/
-.Rprofile.user
-.Renviron.local
-.Renviron
 venv/
 env/
 
 # ==========================================
-# DATA FILES
+# DATA FILES (Open Science: Se ignoran bases pesadas)
 # ==========================================
-# Ignorar todas las bases de datos en raw y processed
 data/raw/*
 !data/raw/.gitkeep
 
 data/processed/*
 !data/processed/.gitkeep
 
-# Archivos de datos pesados (Stata, SPSS, RData, etc.)
+# Datos binarios y pesados de Stata, R, SPSS y Excel
 *.dta
 *.sav
 *.csv
 *.xlsx
 
 # ==========================================
-# OUTPUT FILES (REGENERABLE)
+# OUTPUT FILES (Permitir sincronización con Overleaf)
 # ==========================================
-output/*.png
-output/*.pdf
+# Se ignoran formatos temporales o pesados de salida
 output/*.html
-output/*.jpg
-output/*.jpeg
-output/*.svg
 output/*.xlsx
 output/*.csv
-!output/.gitkeep
+
+# PERMITIR explícitamente código LaTeX (.tex) y gráficos (.pdf / .png)
+!output/
+!output/*.gitkeep
+!output/**/*.tex
+!output/**/*.pdf
+!output/**/*.png
 
 # ==========================================
-# VSCODE
+# STATA & OS SPECIFIC
 # ==========================================
-.vscode/
-!.vscode/settings.json
-!.vscode/launch.json
-
-# ==========================================
-# OS SPECIFIC
-# ==========================================
+*.gph
+*.stsem
 .DS_Store
 Thumbs.db
 *.swp
 *.swo
 *~
-.env.local
-
-# ==========================================
-# IDE
-# ==========================================
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# ==========================================
-# MISC
-# ==========================================
-*.log
-.cache/
-.pytest_cache/
-__pycache__/
-.ipynb_checkpoints/
-*.egg-info/
-.eggs/
-.tmp/
-output/*.csv
-!output/.gitkeep
-
-# General files
-.DS_Store
-.Thumbs.db
-*.swp
-*.swo
-*~
 .vscode/
 .idea/
-
-# Python (if used alongside)
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-ENV/
-
-# OS files
-Thumbs.db
-.DS_Store

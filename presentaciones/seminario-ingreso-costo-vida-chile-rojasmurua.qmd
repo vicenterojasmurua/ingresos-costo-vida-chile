@@ -1,8 +1,5 @@
 ---
-title: "Análisis de Ingresos y Costo de Vida en Chile"
-subtitle: "Resultados y visualizaciones con CASEN 2024"
-author: "Proyecto: ingresos-costo-vida-chile"
-date: "2026-08-20"
+pagetitle: "Análisis de Ingresos y Costo de Vida en Chile"
 format:
   revealjs:
     theme: default
@@ -17,13 +14,13 @@ editor: source
 ---
 
 ::: title-cover
-<img src="../images/logo-sociales.png" class="logo-inline" width="250px"/>
+<img src="../images/logo-sociales.png" class="logo-inline" width="250px" style="position: absolute; top: 0; right: 0;"/>
 
-<h1><strong>Ingresos<wbr> y gastos:</strong></h1>
+<h1><strong>Ingresos<wbr> y gastos</strong></h1>
 
 <p class="cover-subtitle">
 
-<strong> Análisis de datos económicos en Chile</strong>
+<strong> Análisis de datos en Chile (Brasil y Argentina)</strong>
 
 </p>
 
@@ -31,73 +28,204 @@ editor: source
 
 <p class="title-meta">
 
-<strong>Vicente Rojas Murúa</strong><br> Seminario de investigación avanzada en desigualdad y ciudadanía<br> 20 Agosto 2026, Santiago
+<strong>Vicente Rojas Murúa</strong><br> Seminario de investigación avanzada en desigualdad y ciudadanía.<br> Docente: J. C. Castillo, Ph.D.<br> Jueves 20 Agosto 2026, Santiago de Chile.
 
 </p>
 :::
 
-## Guía de presentación
+## Estructura de la presentación {.smaller}
 
-Topicos:
+:::: {.columns}
 
-* **Introducción:** Introducción al tema.
-* **Antecedentes teóricos y empíricos:** Antecedentes de estudios.
-* **Contexto:** Contexto actual.
-* **Objetivo General y Específicos:** Definición de objetivos.
-* **Resultados preliminares:** Resultados estadísticos preliminares.
-
-## Introducción al proyecto
-<br>
-Este proyecto analiza la relación entre los ingresos y el costo de vida utilizando datos de la CASEN 2024.
-
-## Antecedentes Teóricos y Empíricos
-
-La literatura sobre ingresos y costo de vida en Chile destaca la evolución del poder adquisitivo y el bienestar de los hogares:
-
-* **CEPAL:** Tendencias regionales en desigualdad y gasto [@cepalPanoramaSocialAmerica2025].
-* **INE:** Estructura del consumo y canastas [@ineEncuestaPresupuestosFamiliares].
-* **MDSF:** Evolución de la pobreza monetaria [@observatoriosocial-ministeriodedesarrollosocialyfamiliaEncuestaCaracterizacionSocioeconomica2022].
-
-## Contexto
-
-## Algunos datos clave sobre Chile
-<br>
-Chile ha sufrido cambios significativos en su economía y sociedad durante la última década, afectando los ingresos y el costo de vida de los hogares.
-
-## Problema de investigación
-
-::: incremental
-
-- Persisten **problemas económicos** y una parte sustantiva de la sociedad los **sufre** (componentes contextuales). (CITAR)
-
-- La evidencia suele tratar por separado el **ingreso** y el **gasto**, omitiendo el rol articulado de **mecanismos de apropiación**.(CITAR)
-
-- Luego de los datos **CASEN** y **ESI**, persiste la duda sobre la **distribución del poder adquisitivo**. (CITAR)
-
-- El ciclo **2015-2025** expone **desbalances** y evidencia internacional de **crisis**, lo que podría haber **intensificado diferencias** en Chile. (CITAR)
+::: {.column width="50%"}
+* **1. Introducción al proyecto:** Alcance general de la investigación y justificación de la Fase 1 (Caso Chile).
+* **2. Antecedentes y Contexto:** Revisión de literatura empírica y panorama socioeconómico reciente.
+* **3. Problema de investigación:** Diagnóstico, brechas de la literatura y preguntas que guían el estudio.
 :::
 
-## Pregunta de investigación: ¿Cómo se distribuye el poder adquisitivo en Chile, Brasil y Argentina durante el decenio 2015-2025?
+::: {.column width="50%"}
+* **4. Objetivos y Metas:** Propósito del estudio regional comparado y metas específicas para esta etapa preliminar.
+* **5. Análisis y Resultados:** Exploración de microdatos y modelamiento salarial utilizando CASEN 2024.
+* **6. Próximos pasos:** Proyección metodológica hacia el análisis con Brasil (PNAD) y Argentina (EPH).
+:::
+
+::::
+
+## Introducción al proyecto
+
+Esta presentación expone la **Fase 1** de un proyecto de investigación comparado sobre ingresos y costo de vida en Sudamérica (2015–2025).
+
+* **Enfoque inicial:** Análisis exclusivo del caso de **Chile** mediante los microdatos de la encuesta **CASEN 2024**.
+* **Propósito:** Establecer la línea base metodológica, calibrar los modelos salariales y explorar el ajuste por costo de vida antes de escalar el estudio a **Brasil** (PNAD) y **Argentina** (EPH).
+
+## Antecedentes Teóricos y Empíricos {.smaller}
+
+La literatura sobre ingresos y costo de vida en Chile aborda el bienestar desde tres ejes:
+
+* **Acumulación y valor de la fuerza de trabajo:** Dinámicas de acumulación de capital y desvalorización salarial que restringen el ingreso real [@durans.ChileanEconomyAnalysis2022; @durans.VerdaderosSueldosChile2024].
+
+* **Estructura del gasto, tiempo y pobreza:** Presión del presupuesto en bienes esenciales, pobreza de tiempo femenina y actualización de la medición de pobreza [@barrigaMujeresPobrezaTiempo2025; @InformeFinalRecomendaciones2025; @InformePrincipalesResultados2024].
+
+* **Desigualdad estructural y bienestar:** Trampas de baja movilidad social y tensiones emergentes en el bienestar socioeconómico [@cepalPanoramaSocialAmerica2025; @ResumenResultadosCASEN2023; @TensoresBienestarSocial2024].
+
+## Contexto: Algunos datos clave sobre Chile {.smaller}
+
+Durante el decenio **2015–2025**, Chile ha experimentado transformaciones sociodemográficas y económicas decisivas:
+
+* **Ingresos deprimidos:** Una proporción sustancial de la fuerza laboral percibe ingresos insuficientes para cubrir el costo de vida real del hogar [@durans.VerdaderosSueldosChile2024].
+* **Estructura del gasto familiar:** El presupuesto de los hogares de menores ingresos se destina prioritariamente a alimentos, vivienda y servicios básicos [@InformePrincipalesResultados2024].
+* **Tensiones en el bienestar:** Se observan brechas de género en el uso del tiempo e insatisfacción subjetiva sobre las condiciones materiales de vida [@barrigaMujeresPobrezaTiempo2025; @TensoresBienestarSocial2024].
+
+## Problema de investigación {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+### 1. Dimensión Empírica y Social
+
+* **Presión sobre el bienestar cotidiano:** Persisten severas tensiones socioeconómicas y pobreza de tiempo en la reproducción de los hogares 
+  * [@barrigaMujeresPobrezaTiempo2025; @TensoresBienestarSocial2024].
+
+* **Trampa regional (2015–2025):** Un decenio caracterizado por bajo crecimiento, inflación y baja movilidad social que agudiza las brechas en Chile 
+  * [@cepalPanoramaSocialAmerica2025; @ResumenResultadosCASEN2023].
+:::
+
+::: {.column width="50%"}
+### 2. Dimensión Teórico-Metodológica
+
+* **Análisis fragmentado:** La literatura suele separar *ingreso* y *gasto*, ignorando la dinámica de acumulación de capital y valor del trabajo 
+  * [@durans.ChileanEconomyAnalysis2022].
+
+* **Opacidad del poder adquisitivo:** Instrumentos como CASEN y ESI miden ingresos monetarios, pero no el costo real de la vida ni su distribución 
+  * [@durans.VerdaderosSueldosChile2024; @InformePrincipalesResultados2024; @InformeFinalRecomendaciones2025].
+:::
+
+::::
+
+## Preguntas de investigación
+
+**Pregunta general del proyecto:**
+¿Cómo se distribuye el poder adquisitivo en Chile, Brasil y Argentina durante el decenio 2015-2025?
+<hr>
+**Pregunta específica (Fase 1 - Presentación actual):**
+¿Cuáles son las determinantes estructurales de los ingresos en **Chile** (CASEN 2024) y cómo estas diferencias salariales nos dan indicios sobre las brechas de poder adquisitivo?
 
 ## Objetivo General
+**Proyecto completo:** Analizar la relación entre la evolución de los ingresos de los hogares y el costo de vida en Chile, Brasil y Argentina (2015-2025), evaluando las variaciones en el poder adquisitivo.
 <br>
-Analizar la relación entre la evolución de los ingresos de los hogares y el costo de vida en Chile, Brasil y Argentina durante el decenio 2015-2025, evaluando las variaciones en el poder adquisitivo y las heterogeneidades socioeconómicas entre quintiles de ingreso.
+**Fase 1 (Alcance de esta presentación):** Explorar y modelar la distribución de los ingresos laborales en Chile mediante CASEN 2024, identificando brechas sociodemográficas que afecten el poder adquisitivo.
 
-## Objetivos Específicos
+## Objetivos Específicos {.smaller}
 
 ::::{.columns}
 :::{.column width="50%"}
-- Procesar y estandarizar los microdatos de las encuestas de hogares de Chile (CASEN), Brasil (PNAD Contínua) y Argentina (EPH) para el período 2015-2025, equiparando las variables de ingresos y características sociodemográficas del hogar.
+**Para la Fase 1 (Caso Chile - Hoy):**
 
-- Definir y calcular los indicadores de costo de vida, IPC y CBA/CBT para cada país dentro del marco temporal seleccionado.
+- Procesar y estandarizar los microdatos de la encuesta CASEN 2024.
+- Analizar estadísticamente la distribución de ingresos laborales y pobreza monetaria.
+- Modelar las determinantes del salario (sexo, edad, educación, etc.) para identificar brechas iniciales.
 :::
 
 :::{.column width="50%"}
-- Calcular la variación del poder adquisitivo real por quintil de ingreso en las tres economías, identificando brechas y patrones frente a la inflación/crisis.
+**Para las siguientes fases (Estudio Comparativo Tesis):**
 
-- Comparar socioeconómicamente a Chile, Brasil y Argentina.
+- Incorporar y homologar datos de Brasil (PNAD Contínua) y Argentina (EPH).
+- Calcular y cruzar indicadores de costo de vida (IPC y Canasta Básica).
+- Comparar la variación del poder adquisitivo real entre las tres economías.
 :::
 ::::
+
+## Hipótesis de Investigación {.smaller}
+
+Para evaluar la distribución de los ingresos laborales ($y_1$) en CASEN 2024, planteamos las siguientes hipótesis:
+
+* **$H_1$ (Brecha Salarial por Sexo):**
+  * **$H_{1a}$ (Brecha Bruta):** Existen diferencias estadísticamente significativas en el salario promedio (`salario`) entre hombres y mujeres.
+  * **$H_{1b}$ (Brecha Ajustada):** Controlando por capital humano y estructura del hogar, persiste una penalización salarial hacia las mujeres en el logaritmo del salario (`log_salario`).
+
+* **$H_2$ (Rendimientos del Capital Humano):**
+  * Mayores niveles educacionales y la experiencia potencial (`edad` y `edad^2`) incrementan de forma positiva y no lineal el ingreso laboral individual.
+
+* **$H_0$ (Hipótesis Nula):**
+  * No existen diferencias estadísticamente significativas en los ingresos por trabajo según sexo ni rendimiento significativo de las variables de capital humano.
+
+## Estrategia Metodológica: Fuentes de Datos {.smaller}
+
+Para operacionalizar la relación entre **Ingreso** y **Costo de Vida**, combinamos dos fuentes oficiales de microdatos:
+
+::::{.columns}
+:::{.column width="50%"}
+**1. Caracterización e Ingresos:**
+* **Fuente:** CASEN 2024 (MDSF).
+* **Muestra:** Microdatos de hogares a nivel nacional.
+* **Aporte:** Captura la estructura sociodemográfica, `ytotcorh` (ingreso total del hogar) y `salario` ($y_1$).
+:::
+
+:::{.column width="50%"}
+**2. Costo de Vida y Gastos:**
+* **Fuente:** IX EPF 2021-2022 (INE).
+* **Muestra:** Microdatos de la `Base Gastos` y `Base Personas`.
+* **Aporte:** Define la estructura de consumo, ponderadores del IPC y el costo de la Canasta Básica (CBA/CBT).
+:::
+::::
+
+## Operacionalización del Costo de Vida (IX EPF) {.smaller}
+
+La **IX Encuesta de Presupuestos Familiares (INE)** nos permite calibrar la presión del costo de vida sobre los ingresos mediante tres dimensiones:
+
+* **Estructura del Gasto del Hogar (`Base Gastos`):** Permite identificar qué proporción del ingreso destinan los diferentes quintiles a bienes de primera necesidad (alimentos, vivienda, transporte).
+* **Canasta Básica de Alimentos (CBA) y Canasta Total (CBT):** Establece el valor monetario mínimo requerido para satisfacer necesidades biológicas y de consumo.
+* **Sensibilidad a la Inflación:** Permite evaluar cómo el aumento en el precio de la canasta impacta en el poder adquisitivo real según el nivel socioeconómico.
+
+## Costo de la Canasta Básica Alimentaria (EPF)
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(haven)
+library(knitr)
+
+# 1. Cargar bases de datos
+epf_gastos <- read_dta("../data/raw/base-gastos-ix-epf-stata.dta")
+epf_personas <- read_dta("../data/raw/base-personas-ix-epf-stata.dta")
+
+# 2. Filtrar y limpiar folios vacíos o inválidos
+cba_hogares <- epf_gastos %>%
+  filter(!is.na(folio) & folio != "") %>%
+  select(folio, fe, ccif, gasto) %>%
+  filter(grepl("^01", ccif)) %>%
+  group_by(folio) %>%
+  summarise(
+    gasto_alimentos_cba = sum(gasto, na.rm = TRUE),
+    fe = max(fe, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+tamano_hogar <- epf_personas %>%
+  filter(!is.na(folio) & folio != "") %>%
+  group_by(folio) %>%
+  summarise(tot_per_h = n(), .groups = "drop")
+
+# 3. Unir y calcular per cápita
+cba_final <- cba_hogares %>%
+  inner_join(tamano_hogar, by = "folio") %>%
+  mutate(gasto_alimentos_pc = gasto_alimentos_cba / tot_per_h)
+
+# 4. Presentar tabla de resumen para la diapositiva (Ponderada por factor de expansión 'fe')
+cba_final %>%
+  summarise(
+    `Gasto Promedio Hogar` = weighted.mean(gasto_alimentos_cba, w = fe, na.rm = TRUE),
+    `Gasto Mediano Hogar`  = median(gasto_alimentos_cba, na.rm = TRUE),
+    `Gasto Promedio Per Cápita` = weighted.mean(gasto_alimentos_pc, w = fe, na.rm = TRUE),
+    `Gasto Mediano Per Cápita`  = median(gasto_alimentos_pc, na.rm = TRUE)
+  ) %>%
+  pivot_longer(everything(), names_to = "Indicador (CBA - EPF)", values_to = "Monto ($)") %>%
+  kable(digits = 0, format.args = list(big.mark = "."))
+```
 
 ## Resultados preliminares
 
@@ -105,16 +233,18 @@ Analizar la relación entre la evolución de los ingresos de los hogares y el co
 library(tidyverse)
 library(haven)
 library(knitr)
+library(survey)
+library(srvyr)
 
 # Cargar la base de datos
 casen2024 <- readRDS("../data/processed/casen2024_raw.rds")
 
-# Selección de variables y remoción de metadatos/etiquetas Stata
+# Selección de variables y transformación (solo variables utilizadas)
 proc_casen <- casen2024 %>%
   dplyr::select(
-    id_vivienda, folio, id_persona, region, tot_per_h, 
-    edad, sexo, salario = y1, pobreza, 
-    ytotcorh, ytotcor, yaimcorh, yautcorh, yautcor
+    tot_per_h, edad, nivel_educacional = e6a, sexo, 
+    salario = y1, pobreza, ytotcorh,
+    expr, varstrat, varunit 
   ) %>%
   mutate(
     sexo = if_else(sexo == 1, "Hombre", "Mujer"),
@@ -123,10 +253,16 @@ proc_casen <- casen2024 %>%
       pobreza == 2 ~ "Pobreza No Extrema",
       pobreza == 3 ~ "No Pobre",
       TRUE ~ NA_character_
-    )
+    ),
+    # Creación del logaritmo del salario (solo valores mayores a 0)
+    log_salario = if_else(salario > 0, log(salario), NA_real_)
   ) %>%
   haven::zap_labels() %>%
   haven::zap_label()
+
+# Declarar el diseño muestral complejo de CASEN
+diseno_casen <- proc_casen %>%
+  as_survey_design(ids = varunit, strata = varstrat, weights = expr)
 ```
 
 ## 1. Estructura y Limpieza de Datos
@@ -146,68 +282,92 @@ tibble(
   kable(format.args = list(big.mark = "."))
 ```
 
-## Variables Seleccionadas
-<br>
-| Tipo de Variable | Variables Seleccionadas |
-| :--- | :--- |
-| **Identificadores** | `id_vivienda`, `folio`, `id_persona`, `region` |
-| **Demografía** | `tot_per_h` (personas por hogar), `edad`, `sexo` |
-| **Ingresos** | `salario` (y1), `ytotcorh`, `ytotcor`, `yaimcorh`, `yautcorh` |
-| **Social** | `pobreza` |
+## Variables Seleccionadas {.smaller}
 
----
+::: {style="font-size: 0.65em; line-height: 1.2;"}
 
-## 2. Perfil Demográfico de la Muestra
+| Dimensión | Variable | Descripción / Uso en el Análisis |
+| :--- | :--- | :--- |
+| **Demografía** | `sexo`, `edad`, `tot_per_h` | Caracterización de la muestra y controles sociodemográficos en el modelo salarial. |
+| **Educación** | `nivel_educacional` | Nivel educativo alcanzado (renombrada de `e6a`), predictor clave en el modelo Minceriano. |
+| **Ingresos** | `salario`, `ytotcorh` | Salario individual (`y1`) e ingreso total corregido del hogar. |
+| **Variable Creada** | `log_salario` | Logaritmo natural del salario ($\log(y_1)$), variable dependiente en la regresión `svyglm`. |
+| **Bienestar** | `pobreza` | Clasificación oficial de pobreza monetaria (Pobreza Extrema, No Extrema, No Pobre). |
+| **Diseño Muestral**| `expr`, `varstrat`, `varunit` | Factor de expansión, estrato y UPM para inferencia poblacional ponderada en `srvyr`. |
 
-Resumen de variables continuas
+:::
+
+## 2a. Perfil Demográfico de la Muestra: Edad
 
 ```{r}
 #| echo: false
 #| eval: true
 
-# Resumen de variables continuas
-proc_casen %>%
+diseno_casen %>%
   summarise(
-    Promedio = mean(edad, na.rm = TRUE),
-    Mediana  = median(edad, na.rm = TRUE),
-    Mínimo   = min(edad, na.rm = TRUE),
-    Máximo   = max(edad, na.rm = TRUE)
+    Promedio = survey_mean(edad, na.rm = TRUE, vartype = NULL),
+    Mediana  = survey_median(edad, na.rm = TRUE, vartype = NULL)
   ) %>%
-  mutate(Variable = "Edad (Años)") %>%
-  select(Variable, everything()) %>%
+  mutate(
+    Mínimo   = min(proc_casen$edad, na.rm = TRUE),
+    Máximo   = max(proc_casen$edad, na.rm = TRUE),
+    Variable = "Edad (Años)"
+  ) %>%
+  select(Variable, Promedio, Mediana, Mínimo, Máximo) %>%
   kable(digits = 1)
 ```
 
-## 2. Perfil Demográfico de la Muestra
-
-Tabla de frecuencias por Sexo
+## 2b. Perfil Demográfico de la Muestra: Sexo {.smaller}
 
 ```{r}
 #| echo: false
 #| eval: true
 
-# Tabla de frecuencias por Sexo
-proc_casen %>%
-  count(sexo) %>%
-  mutate(Porcentaje = n / sum(n) * 100) %>%
-  kable(digits = 1, col.names = c("Sexo", "Casos (N)", "Porcentaje (%)"), format.args = list(big.mark = "."))
+diseno_casen %>%
+  group_by(sexo) %>%
+  summarise(
+    `Casos (N)` = unweighted(n()),
+    `Porcentaje Poblacional (%)` = survey_mean(vartype = NULL) * 100
+  ) %>%
+  kable(digits = 1, col.names = c("Sexo", "Casos Muestrales (N)", "Porcentaje Poblacional (%)"), format.args = list(big.mark = "."))
 ```
 
-## 3. Distribución de Ingresos y Pobreza
+## 2c. Perfil Sociodemográfico: Tamaño del Hogar {.smaller}
 
-Estadísticos descriptivos del ingreso total del hogar (`ytotcorh`) y clasificación de pobreza:
+Distribución descriptiva de la cantidad de integrantes por hogar (`tot_per_h`) estimada para la población:
+
+<br>
+
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+
+diseno_casen %>%
+  summarise(
+    `Promedio` = survey_mean(tot_per_h, na.rm = TRUE, vartype = NULL),
+    `Mediana`  = survey_median(tot_per_h, na.rm = TRUE, vartype = NULL)
+  ) %>%
+  mutate(
+    `Mínimo`   = min(proc_casen$tot_per_h, na.rm = TRUE),
+    `Máximo`   = max(proc_casen$tot_per_h, na.rm = TRUE)
+  ) %>%
+  pivot_longer(everything(), names_to = "Estadístico", values_to = "N° de Personas") %>%
+  kable(digits = 1, col.names = c("Estadístico Descriptivo", "Valor (N° de Personas)"))
+```
+
+## 3. Distribución de Ingresos del Hogar y el Salario
 
 ```{r}
 #| echo: false
 #| eval: true
 
-# Resumen de Ingresos
-proc_casen %>%
+diseno_casen %>%
   summarise(
-    `Ingreso Promedio Hogar` = mean(ytotcorh, na.rm = TRUE),
-    `Ingreso Mediano Hogar`  = median(ytotcorh, na.rm = TRUE),
-    `Salario Promedio (y1)`  = mean(salario, na.rm = TRUE),
-    `Salario Mediano (y1)`   = median(salario, na.rm = TRUE)
+    `Ingreso Promedio Hogar` = survey_mean(ytotcorh, na.rm = TRUE, vartype = NULL),
+    `Ingreso Mediano Hogar`  = survey_median(ytotcorh, na.rm = TRUE, vartype = NULL),
+    `Salario Promedio (y1)`  = survey_mean(salario, na.rm = TRUE, vartype = NULL),
+    `Salario Mediano (y1)`   = survey_median(salario, na.rm = TRUE, vartype = NULL)
   ) %>%
   pivot_longer(everything(), names_to = "Indicador", values_to = "Monto ($)") %>%
   kable(digits = 0, format.args = list(big.mark = "."))
@@ -215,26 +375,239 @@ proc_casen %>%
 
 ## 4. Distribución de Pobreza Monetaria
 
-Distribución Pobreza
-
 ```{r}
 #| echo: false
 #| eval: true
 
-proc_casen %>%
-  count(pobreza) %>%
-  mutate(Porcentaje = n / sum(n) * 100) %>%
-  kable(digits = 1, col.names = c("Clasificación Pobreza", "Frecuencia (N)", "(%)"), format.args = list(big.mark = "."))
+diseno_casen %>%
+  filter(!is.na(pobreza)) %>%
+  group_by(pobreza) %>%
+  summarise(
+    `Casos (N)` = unweighted(n()),
+    `Porcentaje Poblacional (%)` = survey_mean(vartype = NULL) * 100
+  ) %>%
+  kable(digits = 1, col.names = c("Clasificación Pobreza", "Casos Muestrales (N)", "Porcentaje Poblacional (%)"), format.args = list(big.mark = "."))
 ```
 
-## ¡Gracias! Por su atención...
+## 5. Análisis Bivariado: Salario según Sexo {.smaller}
 
-Links:
+:::: {.columns}
 
-* **GitHub Public Repository:** https://github.com/vicenterojasmurua/ingresos-costo-vida-chile
-* **LinkedIn:** https://www.linkedin.com/in/vicenterojasmurua/
-* **Gmail:** victor.rojas.murua@gmail.com
+::: {.column width="55%"}
 
-## Referencias bibliográficas completas
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+
+library(broom)
+
+# 1. Filtramos el diseño muestral para eliminar NA en las variables de interés
+diseno_limpio <- diseno_casen %>% 
+  filter(!is.na(salario) & !is.na(sexo))
+
+# 2. Prueba T para muestras complejas
+prueba_t_svy <- svyttest(salario ~ sexo, design = diseno_limpio)
+
+# 3. Formato compacto de resultados (solo 3 columnas clave)
+tidy(prueba_t_svy) %>% 
+  mutate(
+    p_signif = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01  ~ "**",
+      p.value < 0.05  ~ "*",
+      TRUE ~ ""
+    ),
+    p_val_str = paste0(format(round(p.value, 3), nsmall = 3), " ", p_signif)
+  ) %>% 
+  select(
+    `Dif. Media ($)` = estimate,
+    `Estadístico t` = statistic,
+    `p-valor` = p_val_str
+  ) %>% 
+  knitr::kable(
+    digits = 2,
+    format.args = list(big.mark = "."),
+    align = c("r", "r", "c")
+  )
+```
+
+:::
+
+::: {.column width="45%"}
+
+::: {style="font-size: 0.65em; line-height: 1.3;"}
+
+Interpretación de Resultados:
+
+Rechazo de $H_0$: La diferencia de ingresos promedio entre hombres y mujeres es estadísticamente significativa ($p < 0.001$).
+
+Evidencia para $H_{1a}$: Confirma la existencia de una brecha salarial bruta en la población ocupada.
+
+Limitación: Al ser un análisis bivariado, no controla por educación, edad u horas trabajadas (lo que se evalúa en el modelo multivariado).
+
+:::
+
+:::
+
+::::
+
+## 6. Modelo Multivariado: Determinantes del Salario {.smaller}
+
+:::: {.columns}
+
+::: {.column width="52%"}
+
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+
+# 1. Agrupar nivel educacional con nombres cortos
+proc_casen_modelo <- proc_casen %>%
+  filter(!is.na(log_salario) & !is.na(nivel_educacional)) %>%
+  mutate(
+    educ_agrup = case_when(
+      nivel_educacional %in% 1:4   ~ "1. Básica (Ref.)",
+      nivel_educacional %in% 5:8   ~ "2. Media",
+      nivel_educacional %in% 9:10  ~ "3. Técnica",
+      nivel_educacional %in% 11:14 ~ "4. Univ/Post",
+      TRUE ~ NA_character_
+    ),
+    educ_agrup = factor(educ_agrup)
+  )
+
+# 2. Re-declarar diseño muestral
+diseno_modelo <- proc_casen_modelo %>%
+  as_survey_design(ids = varunit, strata = varstrat, weights = expr)
+
+# 3. Estimación del Modelo Minceriano
+modelo_salarial_svy <- svyglm(
+  log_salario ~ sexo + edad + I(edad^2) + educ_agrup + tot_per_h, 
+  design = diseno_modelo
+)
+
+# 4. Tabla ultracompacta (3 columnas)
+broom::tidy(modelo_salarial_svy) %>%
+  mutate(
+    p_signif = case_when(
+      p.value < 0.001 ~ "***",
+      p.value < 0.01  ~ "**",
+      p.value < 0.05  ~ "*",
+      TRUE ~ ""
+    ),
+    coef_str = paste0(format(round(estimate, 3), nsmall = 3), " ", p_signif),
+    term = case_when(
+      term == "(Intercept)" ~ "Intercepto",
+      term == "sexoMujer" ~ "Mujer (vs. H)",
+      term == "edad" ~ "Edad",
+      term == "I(edad^2)" ~ "Edad²",
+      term == "tot_per_h" ~ "Tam. Hogar",
+      TRUE ~ gsub("educ_agrup", "Educ. ", term)
+    )
+  ) %>%
+  select(term, coef_str, std.error) %>%
+  knitr::kable(
+    digits = 3,
+    col.names = c("Variable", "Coef. (β)", "E.E."),
+    align = c("l", "r", "r")
+  )
+```
+
+:::
+
+::: {.column width="48%"}
+
+::: {style="font-size: 0.62em; line-height: 1.3;"}
+
+Interpretación Económica:
+
+Brecha de Género ($H_{1b}$): Penalización salarial significativa para mujeres ($\beta < 0$), controlando por capital humano y hogar.
+
+Retornos Educación ($H_2$): Retorno salarial creciente para Educación Técnica y Universitaria/Postgrado respecto a la base (Básica).
+
+Experiencia ($H_2$): Concavidad minceriana confirmada ($\text{Edad} > 0$ y $\text{Edad}^2 < 0$).
+
+Notas:
+
+Signif: *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$.
+
+Dep: $\log(\text{salario})$.
+
+Categóricas: $\% \Delta Y = (\exp(\beta) - 1) \times 100$.
+
+:::
+
+:::
+
+::::
+
+## 7a. Articulación: Indicadores de Cobertura y Brecha (CASEN - EPF) {.smaller}
+
+Cruce del costo de la **Canasta Básica Alimentaria (EPF)** con los ingresos laborales y la estructura del hogar **(CASEN 2024)**:
+
+<br>
+
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+
+# PASO 1: Extraer la Canasta Básica Alimentaria (CBA) per cápita desde la EPF
+cba_pc_epf <- weighted.mean(cba_final$gasto_alimentos_pc, w = cba_final$fe, na.rm = TRUE)
+
+# PASO 2: Procesar la base CASEN con el diseño muestral complejo
+diseno_casen %>%
+  filter(!is.na(salario) & salario > 0) %>%
+  mutate(
+    # Umbral de CBA requerido según integrantes del hogar del trabajador
+    cba_hogar_trabajador = tot_per_h * cba_pc_epf,
+    # Dummy: 1 si el salario no cubre la CBA de su hogar
+    no_cubre_cba = if_else(salario < cba_hogar_trabajador, 1, 0)
+  ) %>%
+  
+  # PASO 3: Inferencia poblacional
+  summarise(
+    `CBA Per Cápita (EPF)` = cba_pc_epf,
+    `CBA Hogar Promedio (4 personas)` = cba_pc_epf * 4,
+    `Salario Mediano (CASEN)` = survey_median(salario, na.rm = TRUE, vartype = NULL),
+    `Ocupados sin Cobertura CBA Familiar (%)` = survey_mean(no_cubre_cba, na.rm = TRUE, vartype = NULL) * 100
+  ) %>%
+  
+  # PASO 4: Formatear tabla
+  pivot_longer(everything(), names_to = "Indicador de Brecha", values_to = "Valor") %>%
+  mutate(
+    `Estimación Poblacional` = if_else(
+      grepl("%", `Indicador de Brecha`),
+      paste0(format(round(Valor, 1), nsmall = 1), " %"),
+      paste0("$ ", format(round(Valor, 0), big.mark = ".", decimal.mark = ","))
+    )
+  ) %>%
+  select(`Indicador de Brecha`, `Estimación Poblacional`) %>%
+  kable()
+```
+
+## 7b. Articulación: Implicancias sobre el Poder Adquisitivo {.smaller}
+
+* **Presión sobre el Ingreso Individual:** La Canasta Básica Alimentaria para un hogar promedio (4 personas) exige una proporción sustancial del salario mediano individual.
+* **Insuficiencia del Salario Laboral:** Una fracción importante de la población ocupada percibe un salario individual insuficiente para cubrir la CBA de su grupo familiar.
+
+## Próximos pasos de la investigación
+
+Una vez validada la metodología con el caso chileno (Fase 1), la investigación avanzará hacia el estudio comparativo regional integrando:
+
+* **Brasil:** Incorporación de microdatos de la PNAD Contínua.
+* **Argentina:** Incorporación de microdatos de la EPH.
+* **Costo de vida:** Construcción del índice de poder adquisitivo real cruzando salarios con inflación/canasta básica en los tres países.
+
+## ¡Gracias! por su atención...
+
+Más información:
+
+* **GitHub:** [vicenterojasmurua/ingresos-costo-vida-chile](https://github.com/vicenterojasmurua/ingresos-costo-vida-chile)
+* **LinkedIn:** [in/vicente-rojas-murua](https://www.linkedin.com/in/vicente-rojas-murua)
+* **E-mail:** [vicente.rojas.murua@ug.uchile.cl](mailto:vicente.rojas.murua@ug.uchile.cl) / [vrojasmurua@gmail.com](mailto:vrojasmurua@gmail.com)
+
+## Referencias bibliográficas completas {.smaller}
 ::: {#refs}
 :::
