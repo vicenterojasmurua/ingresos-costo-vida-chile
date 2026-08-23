@@ -1,0 +1,180 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\vroja\OneDrive\Escritorio\VIRTUAL STUDIO CODE\ingresos-costo-vida-chile\logs/procesamiento_modulo01.log
+  log type:  text
+ opened on:  22 Aug 2026, 21:53:17
+
+. 
+. display "Inicio de ejecucion: " c(current_date) " " c(current_time)
+Inicio de ejecucion: 22 Aug 2026 21:53:17
+
+. 
+. * ------------------------------------------------------------------------------
+. * 2. VERIFICACIÓN E INSTALACIÓN AUTOMÁTICA DE DEPENDENCIAS (PACKAGE MANAGEMENT)
+. * ------------------------------------------------------------------------------
+. 
+. * Librerías necesarias para la exportación directa a LaTeX/Overleaf
+. local packages estout outreg2
+
+. foreach pkg in `packages' {
+  2.     capture which `pkg'
+  3.     if _rc != 0 {
+  4.         display "Instalando paquete requerido: `pkg'"
+  5.         ssc install `pkg', replace
+  6.     }
+  7. }
+
+. 
+. * ------------------------------------------------------------------------------
+. * 3. CARGA Y PROCESAMIENTO DE DATOS
+. * ------------------------------------------------------------------------------
+. 
+. * A. CHILE - CASEN 2024
+. use "data/raw/chile/casen_2024.dta", clear
+(Encuesta Casen 2024)
+
+. 
+. * B. ARGENTINA - EPH
+. import excel "data/raw/argentina/usu_hogar_T126.xlsx", firstrow clear
+(98 vars, 15,447 obs)
+
+. rename *, lower
+
+. save "data/processed/argentina/usu_hogar_T126.dta", replace
+file data/processed/argentina/usu_hogar_T126.dta saved
+
+. 
+. * C. BRASIL - PNAD CONTÍNUA
+. import delimited "data/raw/brasil/PNADC_012026.txt", clear
+(encoding automatically selected: UTF-8)
+(1 var, 511,149 obs)
+
+. 
+. * Volvemos a la base principal de trabajo (Chile - CASEN 2024)
+. use "data/raw/chile/casen_2024.dta", clear
+(Encuesta Casen 2024)
+
+. 
+. * ------------------------------------------------------------------------------
+. * 4. LIMPIEZA, FILTRADO Y CREACIÓN DE VARIABLES
+. * ------------------------------------------------------------------------------
+. 
+. keep folio region sexo edad numper ytotcorh expr
+
+. drop if missing(ytotcorh)
+(107 observations deleted)
+
+. 
+. rename numper numero_personas
+
+. rename ytotcorh ingreso_total
+
+. 
+. * Generación de variables derivadas
+. generate ingreso_percapita = ingreso_total / numero_personas
+
+. label variable ingreso_percapita "Ingreso per cápita del hogar (CLP)"
+
+. 
+. generate tramo_edad = .
+(218,260 missing values generated)
+
+. replace tramo_edad = 1 if edad >= 0 & edad <= 14
+(36,873 real changes made)
+
+. replace tramo_edad = 2 if edad >= 15 & edad <= 64
+(143,948 real changes made)
+
+. replace tramo_edad = 3 if edad >= 65 & !missing(edad)
+(37,439 real changes made)
+
+. 
+. label define etiquetas_edad 1 "0 a 14 años" 2 "15 a 64 años" 3 "65 o más años"
+
+. label values tramo_edad etiquetas_edad
+
+. label variable tramo_edad "Tramo etario"
+
+. 
+. * Save processed data (Garantiza datos limpios e intermedios para replicación)
+. save "data/processed/chile/casen_2024_procesada.dta", replace
+file data/processed/chile/casen_2024_procesada.dta saved
+
+. 
+. * ------------------------------------------------------------------------------
+. * 5. EXPORTACIÓN AUTOMÁTICA DE RESULTADOS A LATEX (OVERLEAF / GITHUB)
+. * ------------------------------------------------------------------------------
+. 
+. * A. TABLA DESCRIPTIVA: Frecuencias de Tramo de Edad e Ingreso Per Cápita
+. eststo clear
+
+. estpost tabulate tramo_edad [aw=expr]
+
+  tramo_edad |      e(b)     e(pct)  e(cumpct) 
+-------------+---------------------------------
+ 0_a_14_años |  39985.12   18.31995   18.31995 
+15_a_64_años |  147787.5   67.71168   86.03163 
+65_o_más_a~s |  30487.37   13.96837        100 
+-------------+---------------------------------
+       Total |    218260        100            
+
+. 
+. esttab using "output/tables/tabla_tramo_edad.tex", replace ///
+>     cell("b(fmt(0)) pct(fmt(2))") ///
+>     collabels("Frecuencia" "Porcentaje") ///
+>     unstack noobs nonumber ///
+>     booktabs ///
+>     title("Distribución por Tramos de Edad (CASEN 2024)\label{tab:tramo_edad}")
+(output written to output/tables/tabla_tramo_edad.tex)
+
+. 
+. * B. TABLA DESCRIPTIVA DE RESUMEN ESTADÍSTICO
+. eststo clear
+
+. estpost summarize ingreso_percapita numero_personas edad [aw=expr], detail
+
+             |  e(count)   e(sum_w)    e(mean)     e(Var)      e(sd)  e(skewn~)  e(kurto~)     e(sum)     e(min)     e(max)      e(p1)      e(p5)     e(p10) 
+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------
+ingreso_pe~a |    218260   2.01e+07   653200.6   5.15e+11     717363   5.517624   69.71743   1.31e+13          0   3.03e+07    89927.5   157008.3     199286 
+numero_per~s |    218260   2.01e+07   3.592413   2.655666   1.629622   1.004298    5.99875   7.23e+07          1         19          1          1          2 
+        edad |    218260   2.01e+07   37.86311   496.0958   22.27321   .2218349   2.189227   7.62e+08          0        107          0          4          8 
+
+             |    e(p25)     e(p50)     e(p75)     e(p90)     e(p95)     e(p99) 
+-------------+------------------------------------------------------------------
+ingreso_pe~a |  288983.3     450000     728333    1280667    1875000    3540556 
+numero_per~s |         2          3          4          6          6          9 
+        edad |        20         36         55         69         76         87 
+
+. 
+. esttab using "output/tables/tabla_estadisticas_descriptivas.tex", replace ///
+>     cells("mean(fmt(2)) sd(fmt(2)) p50(fmt(2)) min(fmt(2)) max(fmt(2))") ///
+>     collabels("Media" "Desv. Est." "Mediana" "Mínimo" "Máximo") ///
+>     booktabs nonumber ///
+>     title("Estadísticas Descriptivas de Variables Clave\label{tab:descriptivos}")
+(output written to output/tables/tabla_estadisticas_descriptivas.tex)
+
+. 
+. * C. GENERACIÓN Y EXPORTACIÓN DE GRÁFICOS (Vectorial .PDF para Overleaf)
+. * Opción recomendada: Usar fweights redondeando el factor de expansión
+. histogram ingreso_percapita [fw=round(expr)] if ingreso_percapita < 2000000, ///
+>     title("Distribución del Ingreso Per Cápita del Hogar") ///
+>     subtitle("Población con ingresos menores a $2.000.000 CLP") ///
+>     xtitle("Ingreso Per Cápita ($)") ytitle("Densidad") ///
+>     graphregion(color(white))
+(bin=72, start=0, width=27775.465)
+
+. 
+. * Exportación en PDF vectorial para Overleaf
+. graph export "output/figures/histograma_ingresos.pdf", as(pdf) replace
+file output/figures/histograma_ingresos.pdf saved as PDF format
+
+. 
+. display "Procesamiento y exportacion finalizados correctamente: " c(current_date) " " c(current_time)
+Procesamiento y exportacion finalizados correctamente: 22 Aug 2026 21:54:43
+
+. log close
+      name:  <unnamed>
+       log:  C:\Users\vroja\OneDrive\Escritorio\VIRTUAL STUDIO CODE\ingresos-costo-vida-chile\logs/procesamiento_modulo01.log
+  log type:  text
+ closed on:  22 Aug 2026, 21:54:43
+-------------------------------------------------------------------------------------------------------------------------------------------------------------

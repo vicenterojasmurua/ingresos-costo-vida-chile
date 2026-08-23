@@ -14,16 +14,27 @@ clear all
 set more off
 macro drop _all
 
-* Garantizar reproducibilidad con versión fijada de Stata y Semilla aleatoria
 version 17
 set seed 20260822
 
-* Definición dinámica del directorio de trabajo (Ruta Relativa)
-* Se asume que el script se ejecuta desde la raíz del repositorio local de Git
-global project_folder "`c(pwd)'"
-cd "$project_folder"
+* Definición explícita del directorio del proyecto
+cd "C:\Users\vroja\OneDrive\Escritorio\VIRTUAL STUDIO CODE\ingresos-costo-vida-chile"
 
-* Creación de un registro de ejecución (Log file) para trazabilidad en Open Science
+* Creación automática de la estructura completa de carpetas (Previene error r(603))
+capture mkdir "logs"
+capture mkdir "data"
+capture mkdir "data/raw"
+capture mkdir "data/raw/chile"
+capture mkdir "data/raw/argentina"
+capture mkdir "data/raw/brasil"
+capture mkdir "data/processed"
+capture mkdir "data/processed/chile"
+capture mkdir "data/processed/argentina"
+capture mkdir "data/processed/brasil"
+capture mkdir "output"
+capture mkdir "output/tables"
+capture mkdir "output/figures"
+
 cap log close
 log using "logs/procesamiento_modulo01.log", replace text
 
@@ -47,19 +58,19 @@ foreach pkg in `packages' {
 * 3. CARGA Y PROCESAMIENTO DE DATOS
 * ------------------------------------------------------------------------------
 
-* A. CHILE - CASEN 2024 (Ruta relativa dentro de la estructura del repositorio)
-use "input/chile/casen_2024.dta", clear
+* A. CHILE - CASEN 2024
+use "data/raw/chile/casen_2024.dta", clear
 
-* B. ARGENTINA - EPH (Conversión trazable)
-import excel "input/argentina/usu_hogar_T126.xlsx", firstrow clear
+* B. ARGENTINA - EPH
+import excel "data/raw/argentina/usu_hogar_T126.xlsx", firstrow clear
 rename *, lower
-save "input/argentina/usu_hogar_T126.dta", replace
+save "data/processed/argentina/usu_hogar_T126.dta", replace
 
 * C. BRASIL - PNAD CONTÍNUA
-import delimited "input/brasil/PNADC_012026.txt", clear
+import delimited "data/raw/brasil/PNADC_012026.txt", clear
 
 * Volvemos a la base principal de trabajo (Chile - CASEN 2024)
-use "input/chile/casen_2024.dta", clear
+use "data/raw/chile/casen_2024.dta", clear
 
 * ------------------------------------------------------------------------------
 * 4. LIMPIEZA, FILTRADO Y CREACIÓN DE VARIABLES
@@ -85,7 +96,7 @@ label values tramo_edad etiquetas_edad
 label variable tramo_edad "Tramo etario"
 
 * Save processed data (Garantiza datos limpios e intermedios para replicación)
-save "input/chile/casen_2024_procesada.dta", replace
+save "data/processed/chile/casen_2024_procesada.dta", replace
 
 * ------------------------------------------------------------------------------
 * 5. EXPORTACIÓN AUTOMÁTICA DE RESULTADOS A LATEX (OVERLEAF / GITHUB)
@@ -113,12 +124,14 @@ esttab using "output/tables/tabla_estadisticas_descriptivas.tex", replace ///
     title("Estadísticas Descriptivas de Variables Clave\label{tab:descriptivos}")
 
 * C. GENERACIÓN Y EXPORTACIÓN DE GRÁFICOS (Vectorial .PDF para Overleaf)
-histogram ingreso_percapita [aw=expr] if ingreso_percapita < 2000000, ///
+* Opción recomendada: Usar fweights redondeando el factor de expansión
+histogram ingreso_percapita [fw=round(expr)] if ingreso_percapita < 2000000, ///
     title("Distribución del Ingreso Per Cápita del Hogar") ///
     subtitle("Población con ingresos menores a $2.000.000 CLP") ///
     xtitle("Ingreso Per Cápita ($)") ytitle("Densidad") ///
     graphregion(color(white))
 
+* Exportación en PDF vectorial para Overleaf
 graph export "output/figures/histograma_ingresos.pdf", as(pdf) replace
 
 display "Procesamiento y exportacion finalizados correctamente: " c(current_date) " " c(current_time)
