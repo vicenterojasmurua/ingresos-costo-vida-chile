@@ -1,0 +1,31 @@
+\section{Método}
+
+El proyecto adoptará un diseño metodológico cuantitativo y comparativo. El entorno de desarrollo principal será Visual Studio Code integrado con el lenguaje R para la programación estadística, empleando GitHub como repositorio centralizado para garantizar el control de versiones y la reproducibilidad de la investigación.
+
+\subsection{Fases del Procesamiento Metodológico}
+La estrategia de análisis se estructurará en tres fases secuenciales:
+\begin{enumerate}
+    \item \textbf{Rastreo, Limpieza y Armonización}: Extracción y estandarización de microdatos desde formatos heterogéneos (\texttt{.txt} para \textit{PNAD Contínua}, \texttt{.xlsx} para \textit{EPH} y \texttt{.dta} para \textit{CASEN}).
+    \item \textbf{Integración de Series de Precios}: Deflactación de los ingresos monetarios del hogar utilizando las series históricas del Índice de Precios al Consumidor (IPC) y el valor de las canastas básicas (CBA y CBT) para estimar valores reales de poder adquisitivo.
+    \item \textbf{Análisis Estadístico Comparativo}: Aplicación de técnicas de estadística descriptiva e inferencial en series de tiempo (2015--2025) para comparar la trayectoria de la vulnerabilidad socioeconómica y la erosión del ingreso entre quintiles.
+\end{enumerate}
+
+\subsection{Operacionalización de Variables}
+\begin{itemize}
+    \item \textbf{Ingreso Monetario Total del Hogar}: Suma de los ingresos del trabajo (asalariado e independiente), jubilaciones/pensiones (contributivas y asistenciales) y transferencias o subsidios estatales. Para asegurar comparabilidad estricta y evitar distorsiones metodológicas, se aplican como límites la exclusión del alquiler imputado y de los ingresos no monetarios.
+    \item \textbf{Costo de Vida}: Medido a nivel de hogar tomando como referencia la Canasta Básica Alimentaria (CBA) y la Canasta Básica Total (CBT), indexadas mediante el comportamiento del IPC oficial de cada economía.
+    \item \textbf{Indicadores a Construir}: Se evaluará la construcción de un \textit{Índice de Capacidad de Compra Comparada del Hogar} y un \textit{Indicador de Cobertura de la Canasta Básica} (número de canastas que puede adquirir un hogar según su quintil).
+\end{itemize}
+
+\subsection{Fuentes de Datos y Repositorios}
+\begin{itemize}
+    \item \textbf{Chile}: Encuesta \textit{CASEN} (Observatorio Social, MIDES) vinculada a series de Canasta Básica e informes de IPC del Instituto Nacional de Estadísticas (INE).
+    \item \textbf{Brasil}: Microdatos de la \textit{PNAD Contínua} del IBGE, complementados con series del IPCA e INPC.
+    \item \textbf{Argentina}: Encuesta Permanente de Hogares (\textit{EPH}) cruzada con informes de CBA, CBT e IPC del INDEC.
+\end{itemize}
+
+El control de versiones del código se gestiona a través del repositorio público en GitHub:
+(\url{https://github.com/vicenterojasmurua/ingresos-costo-vida-chile}) y la documentación en Google Drive.
+
+\subsection{Limitaciones Metodológicas}
+Se contemplan limitaciones inherentes a los datos: la asimetría temporal en los levantamientos (datos trimestrales/anuales en EPH y PNAD frente a bianuales/trianuales en CASEN), posibles sesgos por subdeclaración de ingresos y la heterogeneidad geográfica de precios intra-país.

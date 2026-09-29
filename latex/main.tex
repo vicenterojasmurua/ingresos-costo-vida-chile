@@ -1,0 +1,44 @@
+% !TEX root = main.tex
+\pdfoptionpdfminorversion=7
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+% Permite usar guiones bajos sin entrar accidentalmente en modo matemático.
+% \usepackage[strings]{underscore}
+
+% 1. Desactiva los shorthands para evitar el conflicto entre babel-spanish y biblatex-apa
+\usepackage[spanish, shorthands=off]{babel}
+
+% 2. Requerido por biblatex-apa para gestionar citas contextuales y comillas en español
+\usepackage{csquotes}
+
+% 3. Estilo de bibliografía APA 7ma edición
+\usepackage[style=apa]{biblatex}
+
+% Carga el paquete necesario para insertar imágenes (PDF, PNG, JPG)
+\usepackage{graphicx}
+
+% Le enseña a LaTeX a buscar imágenes un nivel arriba
+\graphicspath{{../images/}}
+
+% Ruta al archivo de bibliografía desde la raíz del proyecto
+\addbibresource{../refs/references.bib} 
+
+\usepackage{amsmath} % Permite usar \text{} dentro de fórmulas matemáticas
+
+\begin{document}
+
+% Inclusión modular de capítulos
+\input{./capitulos/00_portada.tex}
+\input{./capitulos/01_introduccion.tex}
+\input{./capitulos/02_antecedentes.tex}
+% \input{./capitulos/03_marco_teorico.tex}
+% \input{./capitulos/04_problematizacion.tex}
+% \input{./capitulos/05_objetivos.tex}
+% \input{./capitulos/06_metodo.tex}
+% \input{./capitulos/07_equipo_de_proyecto.tex}
+\input{./capitulos/08_anexo_1_reporte.tex}
+% \input{./capitulos/09_anexo_2_material_visual.tex}
+
+% Lista de referencias bibliográficas
+\printbibliography
+\end{document}
